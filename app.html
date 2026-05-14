@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>VEO 3 Flow</title>
+  <meta name="theme-color" content="#050314" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Space+Grotesk:wght@600;700&display=swap');
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; width: 100%; overflow: hidden; background: #050314; font-family: 'DM Sans', sans-serif; color: #f0eeff; }
+    .scene { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
+    .bg-orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.35; animation: drift 8s ease-in-out infinite alternate; }
+    .bg-orb:nth-child(1) { width: 380px; height: 380px; background: #7c4dff; top: -80px; left: -80px; }
+    .bg-orb:nth-child(2) { width: 300px; height: 300px; background: #3dd6f5; bottom: -60px; right: -60px; animation-delay: -3s; }
+    .bg-orb:nth-child(3) { width: 220px; height: 220px; background: #e040fb; top: 40%; left: 30%; animation-delay: -5s; }
+    @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(30px,20px) scale(1.1); } }
+    .logo-wrap { position: relative; width: 120px; height: 120px; }
+    .ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid transparent; animation: spin 3s linear infinite; }
+    .ring-1 { border-top-color: #7c4dff; border-right-color: #7c4dff; animation-duration: 2.4s; }
+    .ring-2 { inset: 10px; border-bottom-color: #3dd6f5; border-left-color: #3dd6f5; animation-duration: 1.8s; animation-direction: reverse; }
+    .ring-3 { inset: 22px; border-top-color: #e040fb; animation-duration: 3.2s; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .logo-center { position: absolute; inset: 32px; background: radial-gradient(circle at 40% 35%, #a78bfa, #6432cc 60%, #1a0840); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 40px #7c4dff88; }
+    .logo-center svg { width: 26px; height: 26px; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+    .brand { text-align: center; }
+    .brand h1 { font-family: 'Space Grotesk', sans-serif; font-size: 1.7rem; font-weight: 700; background: linear-gradient(135deg, #fff 0%, #c4b5fd 50%, #7dd3fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .brand p { margin-top: 6px; font-size: 0.82rem; color: #9d8fcc; letter-spacing: 0.05em; }
+    .progress-track { width: 160px; height: 3px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #7c4dff, #3dd6f5); border-radius: 99px; animation: load 2.2s cubic-bezier(0.4,0,0.2,1) forwards; }
+    @keyframes load { 0% { width: 0%; } 60% { width: 75%; } 90% { width: 92%; } 100% { width: 100%; } }
+    .status { font-size: 0.72rem; color: #7060a0; letter-spacing: 0.08em; text-transform: uppercase; animation: blink 1.6s ease-in-out infinite 1s; }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  </style>
+</head>
+<body>
+  <div class="bg-orb"></div><div class="bg-orb"></div><div class="bg-orb"></div>
+  <div class="scene">
+    <div class="logo-wrap">
+      <div class="ring ring-1"></div><div class="ring ring-2"></div><div class="ring ring-3"></div>
+      <div class="logo-center">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L13.8 8.2L20 10L13.8 11.8L12 18L10.2 11.8L4 10L10.2 8.2L12 2Z" fill="white"/>
+          <path d="M19 15L19.9 17.1L22 18L19.9 18.9L19 21L18.1 18.9L16 18L18.1 17.1L19 15Z" fill="#c4b5fd"/>
+          <path d="M5 3L5.7 4.8L7.5 5.5L5.7 6.2L5 8L4.3 6.2L2.5 5.5L4.3 4.8L5 3Z" fill="#7dd3fc"/>
+        </svg>
+      </div>
+    </div>
+    <div class="brand"><h1>VEO 3 Flow</h1><p>AI Creative Studio</p></div>
+    <div class="progress-track"><div class="progress-fill"></div></div>
+    <div class="status">Đang khởi động…</div>
+  </div>
+  <script>
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+    setTimeout(() => { window.location.replace('https://labs.google/fx/tools'); }, 2400);
+  </script>
+</body>
+</html>
